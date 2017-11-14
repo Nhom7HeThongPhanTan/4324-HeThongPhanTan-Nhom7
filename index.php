@@ -53,9 +53,9 @@
     <!-- Logo -->
     <a href="index.php" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>QLN</b></span>
+      <span class="logo-mini"><b>G</b>M</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>QUẢN LÝ NHÓM</b></span>
+      <span class="logo-lg"><b>GROUP</b>Manergement</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -84,14 +84,14 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">QUẢN TRỊ ADMIN</li>
         <li>
-          <a href="#">
+          <a href="index.php?page=danhsachthanhvien">
             <i class="fa fa-th"></i> <span>Danh sách thành viên</span>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="index.php?page=danhsachnhom">
             <i class="fa fa-group"></i> <span>Danh sách nhóm</span>
             <span class="pull-right-container">
             </span>
@@ -118,8 +118,31 @@
     <!-- Main content -->
     <section class="content">
 	<!-- Nội dung  -->
-	<?php 
-		
+  <?php
+           error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+		    switch($_GET["page"]){
+			case "danhsachthanhvien": include_once("pages/admin/danhsachthanhvien.php");
+			break;
+			case "danhsachnhom": include_once("pages/admin/danhsachnhom.php");
+			break;
+			case "xoaid": include_once("xoaid.php");
+			break;
+	
+case "suaid": include_once("suaid.php");
+			break;
+			
+case "tknv": include_once("tknv.php");
+			break;
+case "themid": include_once("themid.php");
+			break;
+			case "themnghi": include_once("themnghi.php");
+			break;
+			case "xoanghi": include_once("xoanghi.php");
+			break;
+	
+			
+			default: include_once("index.php");
+			}
 	?>
     </section>
 
