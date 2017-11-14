@@ -24,8 +24,8 @@
       else
       {
         $data = mysqli_fetch_array($result);
-        $SESSION['username'] = $data['_USERNAME'];
-        $SESSION['quyenhan'] = $data['_QUYEN'];
+        $_SESSION['username'] = $data['_USERNAME'];
+        $_SESSION['quyenhan'] = $data['_QUYEN'];
         header('Location:../index.php');
       }
       mysqli_free_result($result);
