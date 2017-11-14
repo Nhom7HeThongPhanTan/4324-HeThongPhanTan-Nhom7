@@ -15,7 +15,8 @@
     }
     else
     {
-      $sql = "SELECT * FROM _account WHERE _account._USERNAME = '$username' AND _account._PASSWORD = '$password';";
+	$md5pass = md5($password);
+      $sql = "SELECT * FROM _account WHERE _account._USERNAME = '$username' AND _account._PASSWORD = '$md5pass';";
       $result = mysqli_query($conn,$sql);
       if(mysqli_num_rows($result) == FALSE)
       {
