@@ -83,20 +83,15 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">QUẢN TRỊ ADMIN</li>
-        <li>
-          <a href="index.php?page=danhsachthanhvien">
-            <i class="fa fa-th"></i> <span>Danh sách thành viên</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="index.php?page=danhsachnhom">
-            <i class="fa fa-group"></i> <span>Danh sách nhóm</span>
-            <span class="pull-right-container">
-            </span>
-          </a>
-        </li>
+        <?php 
+          if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 1)
+          {
+            include("./pages/admin/index.php");
+          }else if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 0)
+          {
+            include("./pages/user/index.php");
+          }
+        ?>
         <li>
           <a href="./pages/logout.php">
             <i class="fa fa-backward"></i> <span>Đăng xuất</span>
@@ -119,30 +114,49 @@
     <section class="content">
 	<!-- Nội dung  -->
   <?php
-           error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-		    switch($_GET["page"]){
-			case "danhsachthanhvien": include_once("pages/admin/danhsachthanhvien.php");
-			break;
-			case "danhsachnhom": include_once("pages/admin/danhsachnhom.php");
-			break;
-			case "xoaid": include_once("xoaid.php");
-			break;
-	
-case "suaid": include_once("suaid.php");
-			break;
-			
-case "tknv": include_once("tknv.php");
-			break;
-case "themid": include_once("themid.php");
-			break;
-			case "themnghi": include_once("themnghi.php");
-			break;
-			case "xoanghi": include_once("xoanghi.php");
-			break;
-	
-			
-			default: include_once("index.php");
-			}
+    if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 1)
+    {
+      if(!isset($_GET['page']))
+      {
+        include('./pages/admin/danhsachthanhvien.php');
+      }
+      else
+      {
+        switch($_GET['page'])
+        {
+          case 'danhsachthanhvien':
+          include('./pages/admin/danhsachthanhvien.php');
+          break;
+          case 'danhsachnhom':
+          include('./pages/admin/danhsachnhom.php');
+          break;
+          default:
+          include('./pages/admin/danhsachthanhvien.php');
+          break;
+        }
+      }
+    }else if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 0)
+    {
+      if(!isset($_GET['page']))
+      {
+        include('./pages/user/thongtincanhan.php');
+      }
+      else
+      {
+        switch($_GET['page'])
+        {
+          case 'thongtincanhan':
+          include('./pages/user/thongtincanhan.php'); 
+          break;
+          case 'danhsachcungnhom':
+          include('./pages/user/danhsachcungnhom.php');
+          break;
+          default:
+          include('./pages/user/thongtincanhan.php');
+          break;
+        }
+      }
+    }
 	?>
     </section>
 
@@ -198,5 +212,24 @@ case "themid": include_once("themid.php");
 <script src="dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
+<!-- DataTables -->
+<script src="./bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="./bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- page script -->
+<script>
+  $(function () {
+    $('#tabledanhsachcungnhom').DataTable()
+    $('#tablethongtincanhan').DataTable()
+    $('#tabledanhsachthanhvien').DataTable()
+    $('#tabledanhsachnhom').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
 </body>
 </html>
