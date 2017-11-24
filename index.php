@@ -1,5 +1,6 @@
 <?php 
-	include("./config.php");
+	include_once("/config.php");
+  include_once('/include/SendGetToService.php');
   if(!isset($_SESSION['username']) && !isset($_SESSION['quyenhan']))
   {
     header('Location:./pages/login.php');
@@ -125,14 +126,20 @@
         switch($_GET['page'])
         {
           case 'danhsachthanhvien':
-          include('./pages/admin/danhsachthanhvien.php');
-          break;
+            include('/pages/admin/danhsachthanhvien.php');
+            break;
           case 'danhsachnhom':
-          include('./pages/admin/danhsachnhom.php');
-          break;
+            include('/pages/admin/danhsachnhom.php');
+            break;
+          case 'themnhom':
+            include('/pages/admin/themnhom.php');
+            break;
+          case 'themnguoidung':
+           include('/pages/admin/themnguoidung.php');
+            break;
           default:
-          include('./pages/admin/danhsachthanhvien.php');
-          break;
+            include('./pages/admin/danhsachthanhvien.php');
+            break;
         }
       }
     }else if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 0)
@@ -146,14 +153,17 @@
         switch($_GET['page'])
         {
           case 'thongtincanhan':
-          include('./pages/user/thongtincanhan.php'); 
-          break;
+            include('/pages/user/thongtincanhan.php'); 
+            break;
           case 'danhsachcungnhom':
-          include('./pages/user/danhsachcungnhom.php');
-          break;
+            include('/pages/user/danhsachcungnhom.php');
+            break;
+          case 'chinhsuathongtin':
+            include('/pages/user/chinhsuathongtin.php');
+            break;
           default:
-          include('./pages/user/thongtincanhan.php');
-          break;
+            include('/pages/user/thongtincanhan.php');
+            break;
         }
       }
     }
