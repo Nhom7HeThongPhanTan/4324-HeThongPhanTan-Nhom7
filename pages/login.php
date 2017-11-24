@@ -1,7 +1,8 @@
 <?php
 // login
-  include("../config.php");
-  if(isset($_POST['btn_login']))
+  include_once("../config.php");
+  include_once('../include/SendPostToService.php');
+  if(isset($_POST['login']))
   {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -15,22 +16,17 @@
     }
     else
     {
-	    $md5pass = md5($password);
-      $sql = "SELECT * FROM _account WHERE _account._USERNAME = '$username' AND _account._PASSWORD = '$md5pass';";
-      $result = mysqli_query($conn,$sql);
-      if(mysqli_num_rows($result) == FALSE)
-      {
-        echo "<script> alert(\"Tên đăng nhập hoặc mật khẩu không đúng !\");</script>";
+	    $result = new SendPostToService(URL_LOGIN);
+      $data = $result->getResult();
+      if(!empty($data)){
+        $_SESSION['username'] = $data[0]['_USERNAME'];
+        $_SESSION['quyenhan'] = $data[0]['_QUYEN'];
+        header('Location:../index.php');
       }
       else
       {
-        $data = mysqli_fetch_array($result);
-        $_SESSION['username'] = $data['_USERNAME'];
-        $_SESSION['quyenhan'] = $data['_QUYEN'];
-        header('Location:../index.php');
+        echo "<script> alert(\"Tên đăng nhập hoặc mật khẩu không đúng !\");</script>";
       }
-      mysqli_free_result($result);
-      mysqli_close($conn);
     }
   }
 ?>
@@ -83,7 +79,7 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-xs-12">
-          <button name ="btn_login" type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
+          <button name ="login" type="submit" class="btn btn-primary btn-block btn-flat">Đăng nhập</button>
         </div>
         <!-- /.col -->
       </div>
