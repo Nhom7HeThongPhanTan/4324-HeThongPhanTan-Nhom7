@@ -1,9 +1,9 @@
 <?php 
-	include_once("/config.php");
-  include_once('/include/SendGetToService.php');
+	include_once("config.php");
+  include_once('include/SendGetToService.php');
   if(!isset($_SESSION['username']) && !isset($_SESSION['quyenhan']))
   {
-    header('Location:./pages/login.php');
+    header('Location:pages/login.php');
     die;
   }
 ?>
@@ -87,10 +87,10 @@
         <?php 
           if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 1)
           {
-            include("./pages/admin/index.php");
+            include("pages/admin/index.php");
           }else if(isset($_SESSION['quyenhan']) && $_SESSION['quyenhan'] == 0)
           {
-            include("./pages/user/index.php");
+            include("pages/user/index.php");
           }
         ?>
         <li>
@@ -119,26 +119,26 @@
     {
       if(!isset($_GET['page']))
       {
-        include('./pages/admin/danhsachthanhvien.php');
+        include('pages/admin/danhsachthanhvien.php');
       }
       else
       {
         switch($_GET['page'])
         {
           case 'danhsachthanhvien':
-            include('/pages/admin/danhsachthanhvien.php');
+            include('pages/admin/danhsachthanhvien.php');
             break;
           case 'danhsachnhom':
-            include('/pages/admin/danhsachnhom.php');
+            include('pages/admin/danhsachnhom.php');
             break;
           case 'themnhom':
-            include('/pages/admin/themnhom.php');
+            include('pages/admin/themnhom.php');
             break;
           case 'themnguoidung':
-           include('/pages/admin/themnguoidung.php');
+           include('pages/admin/themnguoidung.php');
             break;
           default:
-            include('./pages/admin/danhsachthanhvien.php');
+            include('pages/admin/danhsachthanhvien.php');
             break;
         }
       }

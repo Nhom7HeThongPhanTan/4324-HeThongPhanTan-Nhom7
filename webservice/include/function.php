@@ -3,7 +3,7 @@
 		private $db;
 		// constructor
 		function __construct(){
-			require_once('/db_connect.php');
+			require_once('db_connect.php');
 			$this->db = new DB_Connect();
 		}
 		// destructor

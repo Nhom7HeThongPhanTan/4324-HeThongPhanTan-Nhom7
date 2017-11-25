@@ -1,5 +1,5 @@
 <?php 
-	include_once('/include/function.php');
+	include_once('include/function.php');
 	// create object DB_Function
 	$db = new DB_Function();
 	$result = '';
