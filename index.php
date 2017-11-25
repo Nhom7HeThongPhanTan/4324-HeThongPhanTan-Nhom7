@@ -94,7 +94,7 @@
           }
         ?>
         <li>
-          <a href="./pages/logout.php">
+          <a href="pages/logout.php">
             <i class="fa fa-backward"></i> <span>Đăng xuất</span>
             <span class="pull-right-container">
             </span>
@@ -146,7 +146,7 @@
     {
       if(!isset($_GET['page']))
       {
-        include('./pages/user/thongtincanhan.php');
+        include('pages/user/thongtincanhan.php');
       }
       else
       {
