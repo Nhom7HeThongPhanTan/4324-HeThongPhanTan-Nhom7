@@ -21,6 +21,18 @@
 			$result = $this->db->SqlExecuteQuery($sql);
 			return $result;
 		}
+		// Hàm kiểm tra tài khoản đã tồn tại
+		public function checkUsername($username){
+			$sql = "SELECT _account._USERNAME FROM _account WHERE _account._USERNAME = '$username'";
+			$result = $this->db->SqlExecuteQuery($sql);
+			return $result;
+		}
+		// Hàm kiểm tra email đã tồn tại
+		public function checkEmail($email){
+			$sql = "SELECT _users._EMAIL FROM _users WHERE _users._EMAIL = '$email'";
+			$result = $this->db->SqlExecuteQuery($sql);
+			return $result;
+		}
 		// hàm lấy danh sách thành viên
 		public function GetDanhSachThanhVien(){
 			$sql = "SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS GIOITINH,_users._NGAYSINH,_users._EMAIL,_account._USERNAME,_groups._TENNHOM FROM _users,_account,_groups WHERE _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID";
@@ -30,6 +42,12 @@
 		// Hàm lấy danh sách nhóm
 		public function GetDanhSachNhom(){
 			$sql = "SELECT * FROM _groups";
+			$result = $this->db->SqlExecuteQuery($sql);
+			return $result;
+		}
+		// Hàm lấy số lượng thành viên đã trong nhóm
+		public function GetSoLuongThanhVienThuocNhom($manhom){
+			$sql = "SELECT COUNT(_users._ID) AS _SOLUONG FROM _users WHERE _users._MANHOM = '$manhom'";
 			$result = $this->db->SqlExecuteQuery($sql);
 			return $result;
 		}
@@ -58,10 +76,35 @@
 			return $result;
 		}
 		// Hàm thêm tài khoản
-		public function PosThemTaiKhoan($id,$username,$password,$quyenhan){
+		public function PosThemTaiKhoan($username,$password,$quyenhan){
 			$password = md5($password);
-			$sql = "INSERT INTO `_account` (`_ID`, `_USERNAME`, `_PASSWORD`, `_QUYEN`) VALUES ('$id', '$username', '$password', b'$quyenhan');";
+			$sql = "INSERT INTO `_account` (`_ID`, `_USERNAME`, `_PASSWORD`, `_QUYEN`) VALUES (NULL, '$username', '$password', b'$quyenhan');";
 			$result = $this->db->SqlExecuteNonQuery($sql);
+			return $result;
+		}
+		// Hàm đăng ký thành viên
+		public function PosDangKyThanhVien($username,$password,$quyenhan,$manhom,$ho,$ten,$gioitinh,$ngaysinh,$email){
+			$sql = "SELECT * FROM `_users` WHERE _users._EMAIL = '$email'";
+			$result = $this->db->SqlExecuteQuery($sql);
+			if($result){
+				$result = false;
+			}
+			else
+			{
+				$result = $this->PosThemTaiKhoan($username,$password,$quyenhan);
+				if($result){
+					$sql = "SELECT _ID FROM `_account` WHERE _account._USERNAME = '$username'";
+					$data = $this->db->SqlExecuteQuery($sql);
+					$result = $this->PosThemNguoiDung($data[0]['_ID'],$manhom,$ho,$ten,$gioitinh,$ngaysinh,$email);
+					if(!$result){
+						$result = false;
+					}
+				}
+				else
+				{
+					$result = false;
+				}
+			}
 			return $result;
 		}
 		// // Hàm xóa nhóm theo mã nhóm

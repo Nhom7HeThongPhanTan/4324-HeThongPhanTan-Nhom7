@@ -4,7 +4,7 @@
 		private $_host = 'localhost';
 		private $_username = 'root';
 		private $_password ='';
-		private $_database = 'group';
+		private $_database = 'quanly_nhom1';
 		// constructor
 		// connecting to database
 		function __construct(){
@@ -35,7 +35,7 @@
 				$result_all[] = $row;
 			}
 			mysqli_free_result($result);
-			$this->CloseDB();
+			//$this->CloseDB();
 			return $result_all;
 		}
 		// Hàm thực hiện chức năng update,insert, delete
