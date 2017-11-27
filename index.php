@@ -1,6 +1,7 @@
 <?php 
 	include_once("config.php");
   include_once('include/SendGetToService.php');
+  include_once('include/SendPostToService.php');
   if(!isset($_SESSION['username']) && !isset($_SESSION['quyenhan']))
   {
     header('Location:pages/login.php');
