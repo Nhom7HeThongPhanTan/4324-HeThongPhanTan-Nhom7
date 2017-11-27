@@ -39,29 +39,41 @@
 				break;
 			case 'themnhom':
 				if(isset($_POST['manhom']) && isset($_POST['tennhom']) && isset($_POST['soluong'])){
+					// gọi tới function thêm nhóm
 					$result = $db->PosThemNhom($_POST['manhom'],$_POST['tennhom'],$_POST['soluong']);
-					$db->CloseDB();
 				}
 				break;
 			case 'dangkytaikhoan':
-				if(isset($_POST['id']) && isset($_POST['username']) && isset($_POST['password']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
-
-					$db->PosThemTaiKhoan($_POST['id'],$_POST['username'],$_POST['password'],0);
-					$result = $db->PosThemNguoiDung($_POST['id'],$_POST['ho'],$_POST['ten'],$_POST['gioitinh'],$_POST['ngaysinh'],$_POST['email']);
-					$db->CloseDB();
+				if(isset($_POST['username']) && isset($_POST['password']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
+					// gọi tới function đăng kí thành viên
+					$result = $db->PosDangKyThanhVien($_POST['username'],$_POST['password'],'0',$_POST['manhom'],$_POST['ho'],$_POST['ten'],$_POST['gioitinh'],$_POST['ngaysinh'],$_POST['email']);
 				}
 				break;
 			case 'themnguoidung':
-				if(isset($_POST['id']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['quyenhan']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
-
-					$db->PosThemTaiKhoan($_POST['id'],$_POST['username'],$_POST['password'],$_POST['quyenhan']);
-					$result = $db->PosThemNguoiDung($_POST['id'],$_POST['ho'],$_POST['ten'],$_POST['gioitinh'],$_POST['ngaysinh'],$_POST['email']);
-					$db->CloseDB();
+				if(isset($_POST['username']) && isset($_POST['password']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
+					// gọi tới function đăng kí thành viên
+					$result = $db->PosDangKyThanhVien($_POST['username'],$_POST['password'],$_POST['quyenhan'],$_POST['manhom'],$_POST['ho'],$_POST['ten'],$_POST['gioitinh'],$_POST['ngaysinh'],$_POST['email']);
+				}
+				break;
+			case 'soluongthanhvienthuocnhom':
+				if(isset($_GET['manhom'])){
+					$result = $db->GetSoLuongThanhVienThuocNhom($_GET['manhom']);
+				}
+				break;
+			case 'checkusername':
+				if(isset($_GET['username'])){
+					$result = $db->checkUsername($_GET['username']);
+				}
+				break;
+			case 'checkemail':
+				if(isset($_GET['email'])){
+					$result = $db->checkEmail($_GET['email']);
 				}
 				break;
 			default : echo "HELLO !!!"; break;
 		}
 	}
+	$db->CloseDB();
 	$json = json_encode($result);
 	echo $json;
 ?>
