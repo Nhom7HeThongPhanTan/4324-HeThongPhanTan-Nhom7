@@ -35,7 +35,7 @@
 		}
 		// hàm lấy danh sách thành viên
 		public function GetDanhSachThanhVien(){
-			$sql = "SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS GIOITINH,_users._NGAYSINH,_users._EMAIL,_account._USERNAME,_groups._TENNHOM FROM _users,_account,_groups WHERE _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID";
+			$sql = "SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS _GIOITINH,_users._NGAYSINH,_users._EMAIL,_account._USERNAME,_groups._TENNHOM FROM _users,_account,_groups WHERE _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID";
 			$result = $this->db->SqlExecuteQuery($sql);
 			return $result;
 		}
@@ -53,13 +53,13 @@
 		}
 		// Hàm lấy thông tin thành viên
 		public function GetThongTinByUsername($username){
-			$sql = "SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS GIOITINH,_users._NGAYSINH,_users._EMAIL,_account._USERNAME,_groups._TENNHOM FROM _users,_account,_groups WHERE _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID AND _account._USERNAME = '$username'";
+			$sql = "SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS _GIOITINH,_users._NGAYSINH,_users._EMAIL,_account._USERNAME,_groups._TENNHOM FROM _users,_account,_groups WHERE _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID AND _account._USERNAME = '$username'";
 			$result = $this->db->SqlExecuteQuery($sql);
 			return $result;
 		}
 		// Hàm lấy thông tin danh sách thành viên cùng nhóm
 		public function GetDanhSachThanhVienCungNhomByUsername($username){
-			$sql ="SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS GIOITINH,_users._NGAYSINH,_users._EMAIL FROM _users,_account,_groups WHERE  _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID AND _groups._MANHOM = (SELECT _users._MANHOM FROM _account,_users WHERE _account._USERNAME = '$username' AND _account._ID = _users._ID)";
+			$sql ="SELECT _users._HO,_users._TEN,(CASE WHEN _users._GIOITINH = 1 THEN 'Nam' WHEN _users._GIOITINH = 0 THEN N'Nữ' END) AS _GIOITINH,_users._NGAYSINH,_users._EMAIL,_groups._TENNHOM FROM _users,_account,_groups WHERE  _groups._MANHOM = _users._MANHOM AND _users._ID = _account._ID AND _groups._MANHOM = (SELECT _users._MANHOM FROM _account,_users WHERE _account._USERNAME = '$username' AND _account._ID = _users._ID)";
 			$result = $this->db->SqlExecuteQuery($sql);
 			return $result;
 		}

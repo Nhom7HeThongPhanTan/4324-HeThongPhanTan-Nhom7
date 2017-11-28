@@ -35,7 +35,7 @@
                 echo "</td>";
                 echo "<td>";
                 // giới tính
-                echo $key['GIOITINH'];
+                echo $key['_GIOITINH'];
                 echo "</td>";
                 echo "<td>";
                 // ngày sinh
