@@ -6,6 +6,7 @@
     </div>
     <!-- /.box-header -->
     <div class="box-body">
+    <a href="index.php?page=themnhom"> <button type="submit" name="them" class="btn btn-info pull-right">THÊM</button></a>
       <table id="tabledanhsachnhom" class="table table-bordered table-hover">
         <thead>
         <tr>

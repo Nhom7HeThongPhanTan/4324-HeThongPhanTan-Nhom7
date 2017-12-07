@@ -50,7 +50,7 @@
 				}
 				break;
 			case 'themnguoidung':
-				if(isset($_POST['username']) && isset($_POST['password']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
+				if(isset($_POST['quyenhan'])&&isset($_POST['username']) && isset($_POST['password']) && $_POST['manhom'] && isset($_POST['ho']) &&isset($_POST['ten']) &&isset($_POST['gioitinh'])&& isset($_POST['ngaysinh']) && isset($_POST['email'])){
 					// gọi tới function đăng kí thành viên
 					$result = $db->PosDangKyThanhVien($_POST['username'],$_POST['password'],$_POST['quyenhan'],$_POST['manhom'],$_POST['ho'],$_POST['ten'],$_POST['gioitinh'],$_POST['ngaysinh'],$_POST['email']);
 				}

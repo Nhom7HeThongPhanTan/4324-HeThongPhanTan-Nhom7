@@ -4,7 +4,7 @@
 		private $_host = 'localhost';
 		private $_username = 'root';
 		private $_password ='';
-		private $_database = 'quanly_nhom1';
+		private $_database = 'group';
 		// constructor
 		// connecting to database
 		function __construct(){

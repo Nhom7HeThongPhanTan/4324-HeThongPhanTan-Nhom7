@@ -5,6 +5,7 @@
       <h3 class="box-title">DANH SÁCH THÀNH VIÊN</h3>
     </div>
     <!-- /.box-header -->
+    <a href="index.php?page=themnguoidung"> <button type="submit" name="them" class="btn btn-info pull-right">THÊM</button></a>
     <div class="box-body">
       <table id="tabledanhsachthanhvien" class="table table-bordered table-hover">
         <thead>
